@@ -3,9 +3,9 @@ import styled from '@emotion/styled';
 export const ContactItem=styled.li`
     display: flex;
     justify-content: space-between;
-    width: 400px;
+    width: 500px;
     margin-bottom: 10px;
-    font-size:20px;
+    font-size:16;
 `
 export const Button=styled.button`
     width: 100px;
@@ -26,6 +26,7 @@ export const Button=styled.button`
 export const ListItem = styled.ul`
     display:flex;
     flex-direction:column;
+    justify-content:space-between;
     padding: 0;
     align-items: center;
 `

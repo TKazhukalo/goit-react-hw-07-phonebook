@@ -1,31 +1,34 @@
 import React from 'react';
-import { nanoid } from "nanoid";
 import { FormContainer, Input, Label } from "components/Form/Form.styled";
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeFilter } from 'redux/filterSlice';
+import { selectStatusFilters } from 'redux/selectors';
 
-export const Filter = ({ value }) => {
-   const dispatch = useDispatch();
-   const filterId = nanoid();  
-return (
-      <FormContainer>
-        <Label htmlFor={filterId}>Find contacts by name</Label>
-        <Input
-      id={filterId}
-      type="text"
-      name="filter"
-      value={value}
-      onChange={evt =>
-        dispatch(changeFilter(evt.target.value.toLowerCase()))
-      }
-        />
-      </FormContainer>
-    );
-  }
+export const Filter = () => {
+
+  const value = useSelector(selectStatusFilters);
+  const dispatch = useDispatch();
+
+  const handleFilterChange = (e) => {
+    const normalizedValue = e.target.value.toLowerCase();
+    dispatch(changeFilter(normalizedValue));
+  };
+
+  return (
+    <FormContainer>
+      <Label>Find contacts by name</Label>
+      <Input
+        type="text"
+        value={value}
+        onChange={handleFilterChange}
+      />
+    </FormContainer>
+  );
+};
 
 Filter.propTypes = {
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
+export default Filter;
