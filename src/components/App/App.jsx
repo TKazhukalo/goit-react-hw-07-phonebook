@@ -28,7 +28,6 @@ export const App = () => {
         ) : (
           <p>Введіть дані</p>
         )}
-         {contacts.length > 0 && (<b>Request in progress...</b>)}
         <ContactsList />
       </Section>
     </Container>

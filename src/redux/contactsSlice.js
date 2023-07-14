@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { addContact, deleteContact, fetchContacts } from './operations';
+import Notiflix from 'notiflix';
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -8,6 +9,7 @@ const handlePending = (state) => {
 const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
+  return Notiflix.Notify.failure(`Щось пішло не так...`, 500);
 };
 
 const contactsSlice = createSlice({
@@ -50,7 +52,7 @@ const contactsSlice = createSlice({
     [deleteContact.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.error = null;
-      const index = state.items.findIndex((contact) => contact.id === action.payload);
+      const index = state.items.findIndex((contact) => contact.id === action.payload.id);
       state.items.splice(index, 1);
     },
   },
