@@ -19,20 +19,6 @@ const contactsSlice = createSlice({
     isLoading: false,
     error: null,
   },
-  reducers: {
-    fetchingInProgress: (state) => {
-      state.isLoading = true;
-    },
-    fetchingSuccess: (state, action) => {
-      state.isLoading = false;
-      state.error = null;
-      state.items = action.payload;
-    },
-    fetchingError: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-  },
   extraReducers: {
     [fetchContacts.pending]: handlePending,
     [fetchContacts.fulfilled]: (state, action) => {
@@ -58,5 +44,4 @@ const contactsSlice = createSlice({
   },
 });
 
-export const { fetchingInProgress, fetchingSuccess, fetchingError } = contactsSlice.actions;
 export default contactsSlice.reducer;
